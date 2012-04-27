@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:py="http://genshi.edgewall.org/" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<title>Site Monitor Admin</title>
+		<link type="text/css" href="/css/site-monitor.css" rel="Stylesheet" />
+	</head>
+	<body id="edit_test">
+		<div id="overlay"></div>
+		<div id="container">
+			<h1 class="section_header">Site Monitor Admin</h1>
+			<a href="#" class="show_details" id="show_monitor" style="margin: 5px;">Monitors</a>
+			<a href="#" class="show_details" id="show_site" style="margin: 10px;">Sites</a>
+			<form id="site_list" method="post" action="/admin/update">
+				<div id="advanced" class="form_entry">
+					<table width="100%" style="padding: 5px;" class="admin-list sortable">
+					<thead py:if="c.length > 0">
+						<tr class="heading">
+							<th class="sortable">ID</th>
+							<th class="sortable">Site Name</th>
+							<th class="sortable">Country Code</th>
+							<th class="sortable">Site Endpoint</th>
+							<th class="sortable">Monitor</th>
+							<th class="sortable">Hosts</th>
+							<th class="sortable">Created Date</th>
+							<th>&nbsp;</th>
+						</tr>
+					</thead>
+					<tbody py:if="c.sites">
+						<tr py:for="site in c.sites" class="static" style="vertical-align: top;" py:attrs="{'id': site.id}">
+							<td class="name" py:content="site.id">ID</td>
+							<td class="name"><a style="color: blue;text-decoration: underline;" href="#" class="site_details" py:attrs="{'id': 'view_%s'%site.id}" py:content="site.name">Site Name</a></td>
+							<td class="name" py:content="site.countryCode">Country Code</td>
+							<td class="name"><a style="color: blue;text-decoration: underline;" href="#" target="new" py:attrs="{'href': '/monitor/index/%s/%s'%(site.countryCode, site.endPoint)}" py:content="site.endPoint">Site Endpoint</a></td>
+							<td class="name"><span py:for="m in site.monitors"><span py:replace="m.name">Monitor</span><br /></span></td>
+							<td class="name"><span py:for="h in site.hosts"><span py:replace="h.name">Host</span><br /></span></td>
+							<td class="name" py:content="site.createdDate.strftime('%Y-%m-%d')">Created Date</td>
+							<td class="input" nowrap="nowrap">
+								<img class="site_details" src="/images/edit.png" py:attrs="{'id': 'view_%s'%site.id}" />
+								<!--img class="delete_name" src="/images/delete.png" py:attrs="{'id': 'delete_%s'%site.id}" /-->
+							</td>
+						</tr>
+					</tbody>
+					<tbody py:if="c.length == 0">
+						<tr>
+							<td colspan="9" id="no_history">Nothing to see here folks</td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr class="pagination" py:if="c.total > 10">
+							<td>
+								<span py:if="c.prev == 0">&laquo; <a py:attrs="{'href': h.url(controller='admin', action='index', limitText='limit', offsetText='offset', limit=c.limit, offset=0)}">Prev</a></span>
+								<span py:if="c.prev">&laquo; <a py:attrs="{'href': h.url(controller='admin', action='index', limitText='limit', offsetText='offset', limit=c.limit, offset=c.prev)}">Prev</a></span>
+							</td>
+							<td colspan="8" style="text-align: center;">Display: 
+								<select id="display" name="display" onChange="document.location=this[this.selectedIndex].value">
+									<option py:if="c.limit == 10" py:attrs="{'value': h.url(controller='admin', action='index', limitText='limit', offsetText='offset', limit=10, offset=0)}" selected="selected">10</option>
+									<option py:if="c.limit != 10" py:attrs="{'value': h.url(controller='admin', action='index', limitText='limit', offsetText='offset', limit=10, offset=0)}">10</option>
+									<option py:if="c.limit == 20" py:attrs="{'value': h.url(controller='admin', action='index', limitText='limit', offsetText='offset', limit=20, offset=0)}" selected="selected">20</option>
+									<option py:if="c.limit != 20" py:attrs="{'value': h.url(controller='admin', action='index', limitText='limit', offsetText='offset', limit=20, offset=0)}">20</option>
+									<option py:if="c.limit == 30" py:attrs="{'value': h.url(controller='admin', action='index', limitText='limit', offsetText='offset', limit=30, offset=0)}" selected="selected">30</option>
+									<option py:if="c.limit != 30" py:attrs="{'value': h.url(controller='admin', action='index', limitText='limit', offsetText='offset', limit=30, offset=0)}">30</option>
+									<option py:if="c.limit == 40" py:attrs="{'value': h.url(controller='admin', action='index', limitText='limit', offsetText='offset', limit=40, offset=0)}" selected="selected">40</option>
+									<option py:if="c.limit != 40" py:attrs="{'value': h.url(controller='admin', action='index', limitText='limit', offsetText='offset', limit=40, offset=0)}">40</option>
+									<option py:if="c.limit == 50" py:attrs="{'value': h.url(controller='admin', action='index', limitText='limit', offsetText='offset', limit=50, offset=0)}" selected="selected">50</option>
+									<option py:if="c.limit != 50" py:attrs="{'value': h.url(controller='admin', action='index', limitText='limit', offsetText='offset', limit=50, offset=0)}">50</option>
+									<option py:if="c.limit == 100" py:attrs="{'value': h.url(controller='admin', action='index', limitText='limit', offsetText='offset', limit=100, offset=0)}" selected="selected">100</option>
+									<option py:if="c.limit != 100" py:attrs="{'value': h.url(controller='admin', action='index', limitText='limit', offsetText='offset', limit=100, offset=0)}">100</option>
+								</select>
+							</td>
+							<td class="next">
+								<span py:if="c.next"><a py:attrs="{'href': h.url(controller='admin', action='index', limitText='limit', offsetText='offset', limit=c.limit, offset=c.next)}">Next</a> &raquo;</span>
+							</td>
+						</tr>
+					</tfoot>
+					</table>
+				</div>
+			</form>
+		</div>
+		<!-- The dark background -->
+		<div class="background-cover">&nbsp;</div>
+		<!-- overlay box -->
+		<div id="overlay-box-monitor" class="overlay-box">
+			<div class="overlay-content">
+				<form id="monitor_details" action="/admin/monitor">
+					<fieldset class="form">
+					<legend id="title">Manage Monitors</legend>
+					<ul>
+						<li>
+							<label for="type">Current Monitors</label>
+							<select class="show_selected" id="monitor" name="monitor" readonly="readonly" py:if="c.monitors">
+								<option value="0">New Monitor</option>
+								<option py:for="monitor in c.monitors" py:attrs="{'value': monitor.id}" py:content="'%d-%s-%s'%(monitor.id, monitor.name, monitor.endPoint)"></option>
+							</select>
+						</li>
+						<li id="monitor_id" class="none">
+							<span id="monitor_id_label">monitor ID</span>
+							<input type="text" id="monitorId" name="objectId" size="15" maxlength="15" />
+						</li>
+						<li>
+							<label for="name">Monitor Name</label>
+							<input type="text" id="monitorName" name="objectName" size="25" maxlength="100" />
+						</li>
+						<li>
+							<label for="name">Monitor Endpoint</label>
+							<input type="text" id="monitorEndPoint" name="objectEndPoint" size="25" maxlength="100" />
+						</li>
+					</ul>
+					<div class="form-controls">
+						<input type="button" class="control cancel_details" id="cancel_monitor" value=" Cancel " style="position: relative;" />
+						<input type="button" class="control submit_details" id="submit_monitor" value=" Submit " style="position: relative;" />
+						<!--input type="button" class="control delete_details" id="delete_monitor" value=" Delete " style="position: relative;" /-->
+					</div>
+					</fieldset>
+					<input type="hidden" id="form" name="form" value="monitor" />
+					<input type="hidden" id="monitorAction" name="action" value="created" />
+					<input type="hidden" id="submitType" name="submitType" value="" />
+					<input type="hidden" id="limit" name="limit" py:attrs="{'value': c.limit}" />
+					<input type="hidden" id="offset" name="offset" py:attrs="{'value': c.offset}" />
+				</form>
+			</div>
+		</div>
+		<div id="overlay-box-site" class="overlay-box">
+			<div class="overlay-content">
+				<form id="site_details" action="/admin/site">
+					<fieldset class="form">
+					<legend id="title">Manage Sites</legend>
+					<ul>
+						<li class="list_view">
+							<label for="type">Current Sites</label>
+							<select class="show_selected" id="site" name="site" readonly="readonly">
+								<option value="0">New Site</option>
+								<!--option py:for="site in c.sites" py:attrs="{'value': site.id}" py:content="'%d-%s'%(site.id, site.name)"></option-->
+							</select>
+						</li>
+						<li>
+							<label for="type">Country Code</label>
+							<select id="siteCountryCode" name="objectCountryCode" readonly="readonly">
+								<option value="US">US</option>
+								<option value="GB">GB</option>
+								<option value="DE">DE</option>
+								<option value="FR">FR</option>
+							</select>
+						</li>
+						<li id="site_id" class="edit_view">
+							<span id="site_id_label">Site ID</span>
+							<input type="text" id="siteId" name="objectId" size="15" maxlength="15" />
+						</li>
+						<li>
+							<label for="name">Site Name</label>
+							<input type="text" id="siteName" name="objectName" size="25" maxlength="100" />
+						</li>
+						<li>
+							<label for="end_point">Site Endpoint</label>
+							<input type="text" id="siteEndPoint" name="objectEndPoint" size="25" maxlength="100" />
+						</li>
+					</ul>
+					<ul>
+						<li>
+							<label for="type">Monitor</label>
+							<select multiple="multiple" id="site_monitor" name="site_monitor" size="3"></select>
+							<div class="spacer"><p>&nbsp;</p></div>
+							<p class="add-remove" style="margin-top: 30px;">
+								<input type="image" src="/images/delete.png" class="remove_item" id="remove_site_monitor" onClick="return false;" style="position: relative" />
+								<input type="image" src="/images/add.png" class="show_items" id="show_site_monitor" onClick="return false;" style="position: relative" />
+							</p>
+						</li>
+					</ul>
+					<ul>
+						<li>
+							<label for="type">Hosts</label>
+							<select multiple="multiple" id="site_host" name="site_host" size="7"></select>
+							<div class="spacer"><p>&nbsp;</p></div>
+							<p class="add-remove" style="margin-top: 70px;">
+								<input type="image" src="/images/delete.png" class="remove_item" id="remove_site_host" onClick="return false;" style="position: relative" />
+								<input type="image" src="/images/add.png" class="show_items" id="show_site_host" onClick="return false;" style="position: relative" />
+							</p>
+						</li>
+					</ul>
+					<div class="form-controls">
+						<input type="button" class="control cancel_details" id="cancel_site" value=" Cancel " style="position: relative;" />
+						<input type="button" class="control submit_details" id="submit_site" value=" Submit " style="position: relative;" />
+						<!--input type="button" class="control delete_details" id="delete_site" value=" Delete " style="position: relative;" /-->
+					</div>
+					</fieldset>
+					<input type="hidden" id="form" name="form" value="site" />
+					<input type="hidden" id="siteAction" name="action" value="created" />
+					<input type="hidden" id="submitType" name="submitType" value="" />
+					<input type="hidden" id="limit" name="limit" py:attrs="{'value': c.limit}" />
+					<input type="hidden" id="offset" name="offset" py:attrs="{'value': c.offset}" />
+				</form>
+				<form id="site_monitor_menu" class="none">
+					<fieldset>
+					<legend id="title">Add Monitor</legend>
+					<div class="wrapper">
+						<ul>
+							<li>
+								<select multiple="multiple" id="site_monitors" name="site_monitors" size="10">
+									<option py:for="monitor in c.monitors" py:attrs="{'value': monitor.id}" py:content="monitor.name"></option>
+								</select>
+							</li>
+							<li class="add-remove">
+								<input type="button" class="control add_item" id="add_site_monitor" value=" Add " />
+								<input type="button" class="control show_items" id="close_site_monitor" value=" Close " />
+							</li>
+						</ul>
+					</div>
+					</fieldset>
+				</form>
+				<form id="site_host_menu" class="none">
+					<fieldset>
+					<legend id="title">Add Host</legend>
+					<div class="wrapper">
+						<ul>
+							<li>
+								<select multiple="multiple" id="site_vips" name="site_vips" size="10">
+									<option py:for="vip in c.vips" py:attrs="{'value': vip.vip}" py:content="vip.vip"></option>
+								</select>
+							</li>
+							<li>
+								<select multiple="multiple" id="site_hosts" name="site_hosts" size="10">
+									<!--option py:for="host in c.hosts" py:attrs="{'value': host.id}" py:content="host.hostName"></option-->
+								</select>
+							</li>
+							<li class="add-remove">
+								<input type="button" class="control add_item" id="add_site_host" value=" Add " />
+								<input type="button" class="control show_items" id="close_site_host" value=" Close " />
+							</li>
+						</ul>
+					</div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+		<div id="status-panel">
+			<div id="app-status">
+				<span>User:</span>
+				<span id="status-ready" py:content="c.user['id']">User ID</span>
+				<span id="notifications">
+					<img id="loading" src="/images/loading_bar.gif" alt="loading" />
+					<span>Processing....Please Wait</span>
+				</span>
+				<span id="message" class="ui-widget" py:if="c.info_messages">
+					<span py:for="msg in c.info_messages">
+						<strong py:content="msg">This is where the messages will go</strong>
+					</span>
+				</span>
+				<span id="message" class="ui-widget" py:if="not c.info_messages"></span>
+			</div>
+			<div id="app-options">
+				<ul>
+					<!--li class="ignore" id="versions"><a href="/admin/versions">Versions</a></li>&nbsp;|&nbsp;-->
+					<li class="ignore" id="index"><a href="/monitor/index">Monitor</a></li>&nbsp;|&nbsp;
+					<li class="ignore" id="logout"><a href="/monitor/logout">Exit Tool</a></li>
+				</ul>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="/js/jquery-1.4.2.min.js"></script>
+	<script type="text/javascript" src="/js/jquery.corner.js"></script>
+	<script type="text/javascript" src="/js/jquery.interface.js"></script>
+	<script type="text/javascript" src="/js/site-monitor.js"></script>
+	<script type="text/javascript">clearMessage();</script>
+</html>

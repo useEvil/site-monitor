@@ -1,0 +1,3 @@
+include sitemonitor/config/deployment.ini_tmpl
+recursive-include sitemonitor/public *
+recursive-include sitemonitor/templates *

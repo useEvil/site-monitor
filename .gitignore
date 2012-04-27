@@ -1,0 +1,17 @@
+# ignore all pyc binary files
+debugScript.py
+*.iml
+.*
+*local.ini
+*.pyc
+data/
+*.egg-info/
+*.egg
+.cache/
+.svn/
+.git/
+develop/
+paster.log
+paster.pid
+sqlnet.log
+.git-p*

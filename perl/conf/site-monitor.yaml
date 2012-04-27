@@ -1,0 +1,97 @@
+# site-monitor.yaml
+# -------------
+# $Revision: 1.11 $
+# $Date: 2005/06/17 21:36:06 $
+# -----------------------------------------------------------------------------
+# Defines the configuration values for the Script
+# -----------------------------------------------------------------------------
+# Publisher FTP Feed configuration
+configure:
+  path_to_log:
+    description: Returns the path to the log with the filename (%Y%m%d)
+    value:
+      dev:  '/home/tnguyen/data/PUB/pr/data/%s/%s/publisher_log_%s_'
+      qa:   '/home/schedule/data/PUB/qa/data/%s/%s/publisher_log_%s_'
+      prod: '/netapp/PUB/pr/data/%s/%s/archive.log/publisher_log_%s_'
+  path_to_build_file:
+    description: Returns the path to the build file with the filename
+    value:
+      dev:  '/home/tnguyen/data/PUB/pr/data/%s/%s/publisher_build.%s'
+      qa:   '/home/schedule/data/PUB/qa/data/%s/%s/publisher_build.%s'
+      prod: '/netapp/PUB/pr/data/%s/%s/publisher_build.%s'
+  secret_key:
+    description: Returns the secret key by country code for encrypting/decrypting data
+    value:
+      US: 'The Secret to Pulisher is to ThinkPurple'
+      GB: 'The Secret to Pulisher is to ThinkPurple'
+      DE: 'The Secret to Pulisher is to ThinkPurple'
+      FR: 'The Secret to Pulisher is to ThinkPurple'
+  file_cleanup:
+    description: Returns the number of sets to keep
+    value: 3
+  log_cleanup:
+    description: Returns the number of days to remove logs
+    value: 3
+  external_email:
+    description: Email address to send emails to for publishers
+    value:
+      dev:
+        US: tnguyen@shopzilla.com
+        GB: tnguyen@shopzilla.com
+        DE: tnguyen@shopzilla.com
+        FR: tnguyen@shopzilla.com
+        US_top: tnguyen@shopzilla.com
+        GB_top: tnguyen@shopzilla.com
+        DE_top: tnguyen@shopzilla.com
+        FR_top: tnguyen@shopzilla.com
+      qa:
+        US: JMcMahan@shopzilla.com
+        GB: JMcMahan@shopzilla.com
+        DE: JMcMahan@shopzilla.com
+        FR: JMcMahan@shopzilla.com
+        US_top: JMcMahan@shopzilla.com
+        GB_top: JMcMahan@shopzilla.com
+        DE_top: JMcMahan@shopzilla.com
+        FR_top: JMcMahan@shopzilla.com
+      prod:
+        US: publisher_feed@shopzilla.com
+        GB: publisher_feed_GB@shopzilla.com
+        DE: publisher_feed_DE@shopzilla.com
+        FR: publisher_feed_FR@shopzilla.com
+        US_top: pub-notify@shopzilla.com
+        GB_top: pub-notify@shopzilla.com
+        DE_top: pub-notify@shopzilla.com
+        FR_top: pub-notify@shopzilla.com
+  to_email:
+    description: Email address to send emails to
+    value:
+      dev:  tnguyen@shopzilla.com
+      qa:   JMcMahan@shopzilla.com
+      prod: pub-notify@shopzilla.com
+  from_email:
+    description: Email address to send emails from
+    value:
+      dev:  tnguyen@shopzilla.com
+      qa:   JMcMahan@shopzilla.com
+      prod: pub-notify@shopzilla.com
+  user_agent:
+    description: Email address to send emails from
+    value: 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0; .NET CLR 1.1.4322)'
+  monitor:
+    description: Email address to send emails from
+    value:
+      splunk:
+       - method: get
+         value: 'http://splunk.shopzilla.laxhq/en-US/account/login'
+         match: [ qr/Login/, "Got expected content: Login" ]
+       - action_2:
+         method: submit_form
+         match: [ qr/Logged in as/, "Got expected content: Logged In" ]
+         value:
+           form_number: 1
+           fields:
+             username: 149924,
+             password: NzQ4RXZJbEVtcElyZTY4ODU=
+# -----------------------------------------------------------------------------
+# $Log: site-monitor.yaml,v $
+# -----------------------------------------------------------------------------

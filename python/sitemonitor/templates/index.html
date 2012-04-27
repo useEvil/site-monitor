@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:py="http://genshi.edgewall.org/" xml:lang="en" lang="en">
+	<head>
+		<title>Monitor It!</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+		<link type="text/css" href="/css/site-monitor.css" rel="Stylesheet"/>
+	</head>
+	<body id="site-monitor" onLoad="hideOverlay('overlay-show');">
+		<div id="overlay"></div>
+		<div id="overlay-show"></div>
+		<!-- The dark background -->
+		<div class="background-cover">&nbsp;</div>
+		<!-- overlay box -->
+		<div id="overlay-box-loading" class="overlay-loading">
+			<img src="/images/loading_circle_lg.gif" border="0" align="center" />
+		</div>
+		<div id="container" class="wrap">
+			<form method="GET" action="" id="applications" style="float: right;">
+				<input type="hidden" id="siteId" name="siteId" py:attrs="{'value': c.site.id}" py:if="c.site" />
+				<select id="switch_site" name="site">
+					<option value="">Select Site</option>
+					<option py:for="site in c.sites" py:attrs="{'value': site.getEndPoint()}" py:content="site.name" selected="${h.hasSelected(c.site, site)}"></option>
+				</select>
+			</form>
+			<h1>Monitor It!</h1>
+			<div id="boxes" py:if="c.site">
+				<div id="sort1" class="groupWrapper col1">
+					<div class="groupItem" py:for="monitor in c.site.getColumnOne(c.prefs)" py:attrs="{'id': monitor.endPoint}">
+						<div class="itemHeader"><span py:content="monitor.name">Monitor</span><a href="#" class="closeEl"><img src="/images/btn_collapse.gif" border="0" alt="collapse" title="collapse" /></a></div>
+						<div class="itemContent">
+							<iframe class="iframe" py:attrs="{'src': '/monitor/%s/%s'%(monitor.endPoint, c.site.getEndPoint())}" scrolling="no" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0"></iframe>
+						</div>
+					</div>
+					<p>&nbsp;</p>
+				</div>
+				<div id="sort2" class="groupWrapper col2">
+					<div class="groupItem" py:for="monitor in c.site.getColumnTwo(c.prefs)" py:attrs="{'id': monitor.endPoint}">
+						<div class="itemHeader"><span py:content="monitor.name">Monitor</span><a href="#" class="closeEl"><img src="/images/btn_collapse.gif" border="0" alt="collapse" title="collapse" /></a></div>
+						<div class="itemContent">
+							<iframe class="iframe" py:attrs="{'src': '/monitor/%s/%s'%(monitor.endPoint, c.site.getEndPoint())}" scrolling="no" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0"></iframe>
+						</div>
+					</div>
+					<p>&nbsp;</p>
+				</div>
+			</div>
+			<div class="spacer"></div>
+			<div id="footer">
+				<a href="http://monitor.shopzilla.laxhq/" style="color: #ccc; text-decoration: none;">monitor.shopzilla.laxhq</a>
+			</div>
+		</div>
+		<div id="status-panel">
+			<div id="app-status">
+				<span>User:</span>
+				<span id="status-ready" py:content="c.user['id']">User ID</span>
+				<span id="notifications">
+					<img id="loading" src="/images/loading_bar.gif" alt="loading" />
+					<span>Processing....Please Wait</span>
+				</span>
+				<span id="message" class="ui-widget" py:if="c.info_messages">
+					<span py:for="msg in c.info_messages">
+						<strong py:content="msg">This is where the messages will go</strong>
+					</span>
+				</span>
+				<span id="message" class="ui-widget" py:if="not c.info_messages"></span>
+			</div>
+			<div id="app-options">
+				<ul>
+					<!--li class="ignore" id="versions"><a href="/admin/versions">Versions</a></li>&nbsp;|&nbsp;-->
+					<li class="ignore" id="index"><a href="/admin/index">Admin</a></li>&nbsp;|&nbsp;
+					<li class="ignore" id="logout"><a href="/monitor/logout">Exit Tool</a></li>
+				</ul>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="/js/jquery-1.4.2.min.js"></script>
+	<script type="text/javascript" src="/js/jquery.corner.js"></script>
+	<script type="text/javascript" src="/js/jquery.interface.js"></script>
+	<script type="text/javascript" src="/js/site-monitor.js"></script>
+	<script type="text/javascript">clearMessage();</script>
+</html>
