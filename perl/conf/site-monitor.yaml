@@ -36,44 +36,44 @@ configure:
     description: Email address to send emails to for publishers
     value:
       dev:
-        US: tnguyen@shopzilla.com
-        GB: tnguyen@shopzilla.com
-        DE: tnguyen@shopzilla.com
-        FR: tnguyen@shopzilla.com
-        US_top: tnguyen@shopzilla.com
-        GB_top: tnguyen@shopzilla.com
-        DE_top: tnguyen@shopzilla.com
-        FR_top: tnguyen@shopzilla.com
+        US: 
+        GB: 
+        DE: 
+        FR: 
+        US_top: 
+        GB_top: 
+        DE_top: 
+        FR_top: 
       qa:
-        US: JMcMahan@shopzilla.com
-        GB: JMcMahan@shopzilla.com
-        DE: JMcMahan@shopzilla.com
-        FR: JMcMahan@shopzilla.com
-        US_top: JMcMahan@shopzilla.com
-        GB_top: JMcMahan@shopzilla.com
-        DE_top: JMcMahan@shopzilla.com
-        FR_top: JMcMahan@shopzilla.com
+        US: 
+        GB: 
+        DE: 
+        FR: 
+        US_top: 
+        GB_top: 
+        DE_top: 
+        FR_top: 
       prod:
-        US: publisher_feed@shopzilla.com
-        GB: publisher_feed_GB@shopzilla.com
-        DE: publisher_feed_DE@shopzilla.com
-        FR: publisher_feed_FR@shopzilla.com
-        US_top: pub-notify@shopzilla.com
-        GB_top: pub-notify@shopzilla.com
-        DE_top: pub-notify@shopzilla.com
-        FR_top: pub-notify@shopzilla.com
+        US: 
+        GB: 
+        DE: 
+        FR: 
+        US_top: 
+        GB_top: 
+        DE_top: 
+        FR_top: 
   to_email:
     description: Email address to send emails to
     value:
-      dev:  tnguyen@shopzilla.com
-      qa:   JMcMahan@shopzilla.com
-      prod: pub-notify@shopzilla.com
+      dev:  
+      qa:   
+      prod: 
   from_email:
     description: Email address to send emails from
     value:
-      dev:  tnguyen@shopzilla.com
-      qa:   JMcMahan@shopzilla.com
-      prod: pub-notify@shopzilla.com
+      dev:  
+      qa:   
+      prod: 
   user_agent:
     description: Email address to send emails from
     value: 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0; .NET CLR 1.1.4322)'
@@ -82,7 +82,7 @@ configure:
     value:
       splunk:
        - method: get
-         value: 'http://splunk.shopzilla.laxhq/en-US/account/login'
+         value: ''
          match: [ qr/Login/, "Got expected content: Login" ]
        - action_2:
          method: submit_form
@@ -90,8 +90,8 @@ configure:
          value:
            form_number: 1
            fields:
-             username: 149924,
-             password: NzQ4RXZJbEVtcElyZTY4ODU=
+             username: ,
+             password: 
 # -----------------------------------------------------------------------------
 # $Log: site-monitor.yaml,v $
 # -----------------------------------------------------------------------------

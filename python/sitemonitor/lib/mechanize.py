@@ -27,11 +27,11 @@ class Mechanize:
         # Option A: return all of the matched events
         browser.open(url)
 
-        ctrl = browser.getControl(name='josso_username')
-        ctrl.value = 'shopzi'
+        ctrl = browser.getControl(name='')
+        ctrl.value = ''
 
-        ctrl = browser.getControl(name='josso_password')
-        ctrl.value = 'olympic'
+        ctrl = browser.getControl(name='')
+        ctrl.value = ''
 
         ctrl = browser.getControl(name='submitButtonName')
         ctrl.click()

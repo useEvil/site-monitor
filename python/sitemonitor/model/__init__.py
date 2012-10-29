@@ -348,32 +348,6 @@ class Host(ORMBase):
         CONSTRAINT PK_HOST PRIMARY KEY (HOST_ID)
     );
 
-    INSERT INTO HOST (HOST_ID, HOST_NAME, HOST_PORT, VIP_NAME) VALUES (1, 'publisher.shopzilla.com', 80, '');
-    INSERT INTO HOST (HOST_ID, HOST_NAME, HOST_PORT, VIP_NAME) VALUES (2, 'affiliateusprod001.sl1.shopzilla.hou', 8080, '');
-    INSERT INTO HOST (HOST_ID, HOST_NAME, HOST_PORT, VIP_NAME) VALUES (3, 'affiliateusprod002.sl1.shopzilla.hou', 8080, '');
-    INSERT INTO HOST (HOST_ID, HOST_NAME, HOST_PORT, VIP_NAME) VALUES (4, 'affiliateusprod003.sl1.shopzilla.hou', 8080, '');
-    INSERT INTO HOST (HOST_ID, HOST_NAME, HOST_PORT, VIP_NAME) VALUES (5, 'affiliateusprod001.sl2.shopzilla.hou', 8080, '');
-    INSERT INTO HOST (HOST_ID, HOST_NAME, HOST_PORT, VIP_NAME) VALUES (6, 'affiliateusprod002.sl2.shopzilla.hou', 8080, '');
-    INSERT INTO HOST (HOST_ID, HOST_NAME, HOST_PORT, VIP_NAME) VALUES (7, 'affiliateusprod003.sl2.shopzilla.hou', 8080, '');
-    INSERT INTO HOST (HOST_ID, HOST_NAME, HOST_PORT, VIP_NAME) VALUES (8, 'affiliategbprod001.sl1.shopzilla.hou', 8800, '');
-    INSERT INTO HOST (HOST_ID, HOST_NAME, HOST_PORT, VIP_NAME) VALUES (9, 'affiliategbprod002.sl1.shopzilla.hou', 8800, '');
-    INSERT INTO HOST (HOST_ID, HOST_NAME, HOST_PORT, VIP_NAME) VALUES (10, 'affiliategbprod003.sl1.shopzilla.hou', 8800, '');
-    INSERT INTO HOST (HOST_ID, HOST_NAME, HOST_PORT, VIP_NAME) VALUES (11, 'affiliategbprod001.sl2.shopzilla.hou', 8800, '');
-    INSERT INTO HOST (HOST_ID, HOST_NAME, HOST_PORT, VIP_NAME) VALUES (12, 'affiliategbprod002.sl2.shopzilla.hou', 8800, '');
-    INSERT INTO HOST (HOST_ID, HOST_NAME, HOST_PORT, VIP_NAME) VALUES (13, 'affiliategbprod003.sl2.shopzilla.hou', 8800, '');
-    INSERT INTO HOST (HOST_ID, HOST_NAME, HOST_PORT, VIP_NAME) VALUES (14, 'affiliatedeprod001.sl1.shopzilla.hou', 8600, '');
-    INSERT INTO HOST (HOST_ID, HOST_NAME, HOST_PORT, VIP_NAME) VALUES (15, 'affiliatedeprod002.sl1.shopzilla.hou', 8600, '');
-    INSERT INTO HOST (HOST_ID, HOST_NAME, HOST_PORT, VIP_NAME) VALUES (16, 'affiliatedeprod003.sl1.shopzilla.hou', 8600, '');
-    INSERT INTO HOST (HOST_ID, HOST_NAME, HOST_PORT, VIP_NAME) VALUES (17, 'affiliatedeprod001.sl2.shopzilla.hou', 8600, '');
-    INSERT INTO HOST (HOST_ID, HOST_NAME, HOST_PORT, VIP_NAME) VALUES (18, 'affiliatedeprod002.sl2.shopzilla.hou', 8600, '');
-    INSERT INTO HOST (HOST_ID, HOST_NAME, HOST_PORT, VIP_NAME) VALUES (19, 'affiliatedeprod003.sl2.shopzilla.hou', 8600, '');
-    INSERT INTO HOST (HOST_ID, HOST_NAME, HOST_PORT, VIP_NAME) VALUES (20, 'affiliatefrprod001.sl1.shopzilla.hou', 8700, '');
-    INSERT INTO HOST (HOST_ID, HOST_NAME, HOST_PORT, VIP_NAME) VALUES (21, 'affiliatefrprod002.sl1.shopzilla.hou', 8700, '');
-    INSERT INTO HOST (HOST_ID, HOST_NAME, HOST_PORT, VIP_NAME) VALUES (22, 'affiliatefrprod003.sl1.shopzilla.hou', 8700, '');
-    INSERT INTO HOST (HOST_ID, HOST_NAME, HOST_PORT, VIP_NAME) VALUES (23, 'affiliatefrprod001.sl2.shopzilla.hou', 8700, '');
-    INSERT INTO HOST (HOST_ID, HOST_NAME, HOST_PORT, VIP_NAME) VALUES (24, 'affiliatefrprod002.sl2.shopzilla.hou', 8700, '');
-    INSERT INTO HOST (HOST_ID, HOST_NAME, HOST_PORT, VIP_NAME) VALUES (25, 'affiliatefrprod003.sl2.shopzilla.hou', 8700, '');
-    INSERT INTO HOST (HOST_ID, HOST_NAME, HOST_PORT, VIP_NAME) VALUES (26, 'affassetmgr001.shopzilla.laxhq', 80, '');
     SELECT * FROM HOST;
     """
 
